@@ -1,0 +1,26 @@
+{
+  "name": "keboola/magento-v1-extractor",
+  "license": "MIT",
+  "type": "project",
+  "description": "Keboola Magento v1 Extractor",
+  "keywords": ["keboola", "magento"],
+  "authors": [
+    {
+      "name": "Jakub Matejka",
+      "email": "jakub@keboola.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": "~5.6",
+    "keboola/csv": "~1.1",
+    "keboola/php-temp": "0.1.3",
+    "monolog/monolog": "^1.22",
+    "keboola/magento-extractor-bundle": "dev-production"
+  },
+  "autoload": {
+    "psr-4": {
+      "Keboola\\MagentoExtractor\\": "src/Keboola/MagentoExtractor/"
+    }
+  }
+}
