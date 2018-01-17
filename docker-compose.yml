@@ -4,18 +4,9 @@ services:
 
   app:
     build: .
-    image: keboola/magento-v1-extractor
+    image: keboola/ex-magento-v1
     tty: true
     stdin_open: true
-
-  test:
-    image: keboola/magento-v1-extractor
-    volumes:
-      - ./:/code
-      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
-    entrypoint: /code/vendor/bin/phpunit
-    environment:
-      - DYNAMO_TABLE
 
   dev:
     build:
@@ -26,16 +17,3 @@ services:
     volumes:
       - ./:/code
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
-    environment:
-      - KBC_PROJECTID
-
-  travis-php-test:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    environment:
-      - "DYNAMO_TABLE=${TRAVIS_DYNAMO_TABLE}"
-    command: >
-           sh -c '
-           ./vendor/bin/phpunit
-           '

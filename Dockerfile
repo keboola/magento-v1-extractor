@@ -14,8 +14,10 @@ RUN curl -sS https://getcomposer.org/installer | php \
   && mv /code/composer.phar /usr/local/bin/composer
 
 COPY . /code/
+COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
+
 WORKDIR /code
 
-RUN php -d memory_limit=-1 /usr/local/bin/composer install
+RUN composer install
 
 CMD php ./src/run.php run ./data
