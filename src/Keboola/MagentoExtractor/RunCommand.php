@@ -7,7 +7,6 @@
 namespace Keboola\MagentoExtractor;
 
 use Keboola\MagentoExtractorBundle\MagentoExtractor;
-use Keboola\Temp\Temp;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\JsonDecode;
@@ -45,7 +44,7 @@ class RunCommand extends Command
             $config = new Config('magento-v1-extractor', getenv('KBC_CONFIGID'), []);
             $config->setRunId(getenv('KBC_RUNID'));
             $config->setAttributes([
-                'signature_method' => 'HMAC-SHA1',
+                'signature_method' => 'PLAINTEXT',
                 'api_url' => $userConfiguration['apiUrl'],
                 'oauth' => [
                     'consumer_key' => $userConfiguration['oauthConsumerKey'],
@@ -63,6 +62,9 @@ class RunCommand extends Command
             }
 
             return 0;
+        } catch (\Syrup\ComponentBundle\Exception\UserException $e) {
+            $consoleOutput->writeln($e->getMessage());
+            return 1;
         } catch (Exception $e) {
             $consoleOutput->writeln($e->getMessage());
             return 1;
