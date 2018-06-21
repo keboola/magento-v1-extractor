@@ -39,7 +39,9 @@ class RunCommand extends Command
 
             $userConfiguration = $this->validateUserConfiguration($config);
 
-            \Monolog\Registry::addLogger(new \Monolog\Logger('extractor', [new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, \Monolog\Logger::WARNING)]));
+            $logger = new \Monolog\Logger('extractor', [new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, \Monolog\Logger::WARNING)]);
+            \Monolog\Registry::addLogger($logger);
+            \Keboola\ExtractorBundle\Common\Logger::setLogger($logger);
 
             $config = new Config('magento-v1-extractor', getenv('KBC_CONFIGID'), []);
             $config->setRunId(getenv('KBC_RUNID'));
