@@ -30,3 +30,6 @@ Docker Wrapper for [keboola/magento-extractor-bundle](https://github.com/keboola
 ```
 
 The `jobs` section is a simple json form of a csv configuration table from the old extractor, see [keboola/magento-extractor-bundle](https://github.com/keboola/magento-extractor-bundle#data) for details.
+## License
+
+MIT licensed, see [LICENSE](./LICENSE) file.
